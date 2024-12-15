@@ -1,4 +1,4 @@
-package de.malteasm.updateservice.update.device;
+package de.malteasm.updateservice.common.device.db;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

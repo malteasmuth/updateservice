@@ -83,3 +83,20 @@ databaseChangeLog:
               - column:
                   name: hardware_id
                   value: "NCC-74656"
+
+  - changeSet:
+      id: 6
+      author: mas
+      changes:
+        - insert:
+            tableName: firmware_version
+            columns:
+              - column:
+                  name: version_number
+                  value: "23.12.3"
+              - column:
+                  name: download_url
+                  value: "www.api.version/NCC-1701/23.12.3"
+              - column:
+                  name: hardware_id
+                  value: "NCC-1701"

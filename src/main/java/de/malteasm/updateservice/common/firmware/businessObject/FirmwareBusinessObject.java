@@ -1,6 +1,5 @@
-package de.malteasm.updateservice.update.firmware.businessObject;
+package de.malteasm.updateservice.common.firmware.businessObject;
 
-import de.malteasm.updateservice.update.firmware.businessObject.Version;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

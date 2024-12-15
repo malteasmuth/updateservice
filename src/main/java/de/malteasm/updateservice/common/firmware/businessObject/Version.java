@@ -1,4 +1,4 @@
-package de.malteasm.updateservice.update.firmware.businessObject;
+package de.malteasm.updateservice.common.firmware.businessObject;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,32 +15,16 @@ public class Version implements Comparable<Version> {
 
     @Override
     public int compareTo(Version o) {
-
-        if(this.major > o.major){
-            return 1;
+        if (o == null) {
+            throw new NullPointerException();
         }
-
-        if(this.major < o.major){
-            return -1;
+        if (major != o.major) {
+            return Integer.compare(this.major, o.major);
         }
-
-        if(this.minor > o.minor){
-            return 1;
+        if (minor != o.minor) {
+            return Integer.compare(this.minor, o.minor);
         }
-
-        if(this.minor < o.minor){
-            return -1;
-        }
-
-        if(this.patch > o.patch){
-            return 1;
-        }
-
-        if(this.patch < o.patch){
-            return -1;
-        }
-
-        return 0;
+        return Integer.compare(this.patch, o.patch);
     }
 
     @Override

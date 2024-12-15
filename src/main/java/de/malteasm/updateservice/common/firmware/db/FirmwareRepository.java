@@ -1,6 +1,7 @@
-package de.malteasm.updateservice.update.firmware.db;
+package de.malteasm.updateservice.common.firmware.db;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

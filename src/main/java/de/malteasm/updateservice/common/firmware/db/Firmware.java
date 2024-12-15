@@ -1,4 +1,4 @@
-package de.malteasm.updateservice.update.firmware.db;
+package de.malteasm.updateservice.common.firmware.db;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

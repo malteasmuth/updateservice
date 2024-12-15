@@ -1,6 +1,6 @@
-package de.malteasm.updateservice.update.firmware.businessObject;
+package de.malteasm.updateservice.common.firmware.businessObject;
 
-import de.malteasm.updateservice.update.firmware.db.Firmware;
+import de.malteasm.updateservice.common.firmware.db.Firmware;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,10 @@ public class FirmwareEntityMapper {
     public FirmwareBusinessObject toBusinessObject(Firmware firmwareVersion){
 
         Version versionNumber = createVersionFromString(firmwareVersion.getVersionNumber());
-        return new FirmwareBusinessObject(firmwareVersion.getVersionId(), versionNumber, firmwareVersion.getDownloadURL(), firmwareVersion.getHardwareId());
+        return new FirmwareBusinessObject(firmwareVersion.getVersionId(),
+                versionNumber,
+                firmwareVersion.getDownloadURL(),
+                firmwareVersion.getHardwareId());
     }
 
     public Firmware toEntity(FirmwareBusinessObject firmwareBusinessObject){

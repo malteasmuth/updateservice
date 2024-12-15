@@ -1,5 +1,6 @@
 package de.malteasm.updateservice.updatefinder.service;
 
+import de.malteasm.updateservice.common.firmware.db.Firmware;
 import de.malteasm.updateservice.updatefinder.UpdateService;
 import de.malteasm.updateservice.common.firmware.businessObject.FirmwareEntityMapper;
 import de.malteasm.updateservice.common.firmware.businessObject.FirmwareBusinessObject;
@@ -9,6 +10,7 @@ import de.malteasm.updateservice.updatefinder.api.dto.UpdateInformation;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.List;
 
 @Service
 public class UpdateServiceImpl implements UpdateService {
@@ -22,10 +24,15 @@ public class UpdateServiceImpl implements UpdateService {
     }
 
     @Override
-    public UpdateInformation findUpdateForDevice(String hardwareId, String versionId){
-        var currentVersion = entityMapper.createVersionFromString(versionId);
-        return firmwareRepository.findAllByHardwareId(hardwareId)
-                .stream()
+    public UpdateInformation findUpdateForDevice(String hardwareId, String currentFirmwareVersion){
+        var currentVersion = entityMapper.createVersionFromString(currentFirmwareVersion);
+        List<Firmware> firmwareVersions = firmwareRepository.findAllByHardwareId(hardwareId);
+
+        if(firmwareVersions.isEmpty()){
+            throw new IllegalArgumentException("No firmware versions with this hardware id found");
+        }
+
+        return firmwareVersions.stream()
                 .map(entityMapper::toBusinessObject)
                 .filter(version -> isANewerVersion(version, currentVersion))
                 .max(Comparator.naturalOrder())

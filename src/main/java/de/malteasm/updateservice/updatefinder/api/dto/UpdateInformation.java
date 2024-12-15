@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateInformation {
-    private boolean hasNewFirmwareVersion; // vielleicht redundant
+    private boolean hasNewFirmwareVersion;
     private String updateUrl;
     private String hardwareId;
 }

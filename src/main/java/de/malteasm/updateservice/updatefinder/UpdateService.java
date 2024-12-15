@@ -4,5 +4,5 @@ import de.malteasm.updateservice.updatefinder.api.dto.UpdateInformation;
 
 public interface UpdateService {
 
-    UpdateInformation findUpdateForDevice(String hardwareId, String versionId);
+    UpdateInformation findUpdateForDevice(String hardwareId, String currentFirmwareVersion);
 }

@@ -2,6 +2,8 @@ package de.malteasm.updateservice.firmwarepublishing.service;
 
 import de.malteasm.updateservice.common.firmware.businessObject.FirmwareBusinessObject;
 import de.malteasm.updateservice.common.firmware.businessObject.FirmwareEntityMapper;
+import de.malteasm.updateservice.common.firmware.businessObject.Version;
+import de.malteasm.updateservice.common.firmware.db.Firmware;
 import de.malteasm.updateservice.common.firmware.db.FirmwareRepository;
 import de.malteasm.updateservice.firmwarepublishing.PublishFirmwareService;
 import de.malteasm.updateservice.firmwarepublishing.api.dto.FirmwareVersionDto;
@@ -20,8 +22,14 @@ public class PublishFirmwareServiceImpl implements PublishFirmwareService {
 
     @Override
     public FirmwareVersionDto save(FirmwareVersionDto firmware) {
-        FirmwareBusinessObject firmwareToSave = new FirmwareBusinessObject(entityMapper.createVersionFromString(firmware.getVersionNumber()), firmware.getDownloadUrl(), firmware.getHardwareId());
-        FirmwareBusinessObject savedFirmwareVersion = entityMapper.toBusinessObject(firmwareRepository.save(entityMapper.toEntity(firmwareToSave)));
-        return new FirmwareVersionDto(savedFirmwareVersion.getVersionNumber().toString(), savedFirmwareVersion.getDownloadURL(), savedFirmwareVersion.getHardwareId());
+        Version versionNumber = entityMapper.createVersionFromString(firmware.getVersionNumber());
+        FirmwareBusinessObject firmwareToSave = new FirmwareBusinessObject(versionNumber, firmware.getDownloadUrl(), firmware.getHardwareId());
+
+        Firmware savedFirmware = firmwareRepository.save(entityMapper.toEntity(firmwareToSave));
+        FirmwareBusinessObject firmwareBusinessObject = entityMapper.toBusinessObject(savedFirmware);
+
+        return new FirmwareVersionDto(firmwareBusinessObject.getVersionNumber().toString(),
+                firmwareBusinessObject.getDownloadURL(),
+                firmwareBusinessObject.getHardwareId());
     }
 }

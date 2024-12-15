@@ -1,8 +1,7 @@
 package de.malteasm.updateservice.updatefinder.api;
 
 import de.malteasm.updateservice.updatefinder.UpdateService;
-import de.malteasm.updateservice.updatefinder.api.dto.UpdateRequestDto;
-import de.malteasm.updateservice.updatefinder.api.dto.UpdateResponseDto;
+import de.malteasm.updateservice.updatefinder.api.dto.UpdateInformation;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,9 +15,7 @@ public class UpdateController{
     }
 
     @GetMapping("/version-update")
-    public UpdateResponseDto getUpdate(@RequestParam String hardwareId, @RequestParam String currentFirmwareVersion){
-
-        UpdateRequestDto updateRequestDTO = new UpdateRequestDto(hardwareId, currentFirmwareVersion);
-        return updateService.findUpdateForDevice(updateRequestDTO);
+    public UpdateInformation getUpdate(@RequestParam String hardwareId, @RequestParam String currentFirmwareVersion){
+        return updateService.findUpdateForDevice(hardwareId, currentFirmwareVersion);
     }
 }

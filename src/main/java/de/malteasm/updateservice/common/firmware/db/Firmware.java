@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "firmware_version")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class Firmware {
-
     @Id
     @Column(name = "version_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

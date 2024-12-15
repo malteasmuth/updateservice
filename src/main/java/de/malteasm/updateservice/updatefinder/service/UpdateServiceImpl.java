@@ -5,12 +5,10 @@ import de.malteasm.updateservice.common.firmware.businessObject.FirmwareEntityMa
 import de.malteasm.updateservice.common.firmware.businessObject.FirmwareBusinessObject;
 import de.malteasm.updateservice.common.firmware.businessObject.Version;
 import de.malteasm.updateservice.common.firmware.db.FirmwareRepository;
-import de.malteasm.updateservice.updatefinder.api.dto.UpdateRequestDto;
-import de.malteasm.updateservice.updatefinder.api.dto.UpdateResponseDto;
+import de.malteasm.updateservice.updatefinder.api.dto.UpdateInformation;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
-import java.util.List;
 
 @Service
 public class UpdateServiceImpl implements UpdateService {
@@ -24,15 +22,15 @@ public class UpdateServiceImpl implements UpdateService {
     }
 
     @Override
-    public UpdateResponseDto findUpdateForDevice(UpdateRequestDto updateRequestDto){
-        var currentVersion = entityMapper.createVersionFromString(updateRequestDto.getCurrentFirmwareVersion());
-        return firmwareRepository.findAllByHardwareId(updateRequestDto.getHardwareId())
+    public UpdateInformation findUpdateForDevice(String hardwareId, String versionId){
+        var currentVersion = entityMapper.createVersionFromString(versionId);
+        return firmwareRepository.findAllByHardwareId(hardwareId)
                 .stream()
                 .map(entityMapper::toBusinessObject)
                 .filter(version -> isANewerVersion(version, currentVersion))
                 .max(Comparator.naturalOrder())
-                .map(f -> new UpdateResponseDto(true, f.getDownloadURL(), f.getHardwareId()))
-                .orElseGet(() -> new UpdateResponseDto(false, null, updateRequestDto.getHardwareId()));
+                .map(firmware -> new UpdateInformation(true, firmware.getDownloadURL(), firmware.getHardwareId()))
+                .orElseGet(() -> new UpdateInformation(false, null, hardwareId));
     }
 
     private static boolean isANewerVersion(FirmwareBusinessObject version, Version currentVersion) {

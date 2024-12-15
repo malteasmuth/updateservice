@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateResponseDto {
+public class UpdateInformation {
     private boolean hasNewFirmwareVersion; // vielleicht redundant
     private String updateUrl;
     private String hardwareId;
-    // neue Versionsnummer
-
 }

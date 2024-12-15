@@ -11,17 +11,17 @@ public class FirmwareEntityMapper {
     public FirmwareBusinessObject toBusinessObject(Firmware firmwareVersion){
 
         Version versionNumber = createVersionFromString(firmwareVersion.getVersionNumber());
-        return new FirmwareBusinessObject(firmwareVersion.getVersionId(),
-                versionNumber,
+        return new FirmwareBusinessObject(versionNumber,
                 firmwareVersion.getDownloadURL(),
                 firmwareVersion.getHardwareId());
     }
 
     public Firmware toEntity(FirmwareBusinessObject firmwareBusinessObject){
-        return new Firmware(firmwareBusinessObject.getVersionId(),
-                firmwareBusinessObject.getVersionNumber().toString(),
-                firmwareBusinessObject.getDownloadURL(),
-                firmwareBusinessObject.getHardwareId());
+        Firmware firmware = new Firmware();
+        firmware.setDownloadURL(firmwareBusinessObject.getDownloadURL());
+        firmware.setHardwareId(firmwareBusinessObject.getHardwareId());
+        firmware.setVersionNumber(firmware.getVersionNumber());
+        return firmware;
     }
 
     public Version createVersionFromString(String versionNumberString){

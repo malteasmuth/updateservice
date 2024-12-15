@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class FirmwareBusinessObject implements Comparable<FirmwareBusinessObject> {
-
-    private int versionId;
     private Version versionNumber;
     private String downloadURL;
     private String hardwareId;

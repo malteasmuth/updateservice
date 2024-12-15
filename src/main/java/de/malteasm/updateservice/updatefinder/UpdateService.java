@@ -1,9 +1,8 @@
 package de.malteasm.updateservice.updatefinder;
 
-import de.malteasm.updateservice.updatefinder.api.dto.UpdateRequestDto;
-import de.malteasm.updateservice.updatefinder.api.dto.UpdateResponseDto;
+import de.malteasm.updateservice.updatefinder.api.dto.UpdateInformation;
 
 public interface UpdateService {
 
-    UpdateResponseDto findUpdateForDevice(UpdateRequestDto updateRequestDTO);
+    UpdateInformation findUpdateForDevice(String hardwareId, String versionId);
 }

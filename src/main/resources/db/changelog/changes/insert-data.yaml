@@ -1,0 +1,85 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: mas
+      changes:
+        - insert:
+            tableName: device
+            columns:
+              - column:
+                  name: hardware_id
+                  value: "NCC-74656"
+              - column:
+                  name: product_name
+                  value: "Fritz!Box 1"
+              - column:
+                  name: launch_year
+                  value: "2004-01-12"
+
+  - changeSet:
+      id: 2
+      author: mas
+      changes:
+        - insert:
+            tableName: device
+            columns:
+              - column:
+                  name: hardware_id
+                  value: "NCC-1701"
+              - column:
+                  name: product_name
+                  value: "Fritz!Box 3"
+              - column:
+                  name: launch_year
+                  value: "2009-09-12"
+
+  - changeSet:
+      id: 3
+      author: mas
+      changes:
+        - insert:
+            tableName: firmware_version
+            columns:
+              - column:
+                  name: version_number
+                  value: "2.8.19"
+              - column:
+                  name: download_url
+                  value: "www.api.version/2.8.19"
+              - column:
+                  name: hardware_id
+                  value: "NCC-74656"
+
+  - changeSet:
+      id: 4
+      author: mas
+      changes:
+        - insert:
+            tableName: firmware_version
+            columns:
+              - column:
+                  name: version_number
+                  value: "2.9.1"
+              - column:
+                  name: download_url
+                  value: "www.api.version/2.9.1"
+              - column:
+                  name: hardware_id
+                  value: "NCC-74656"
+
+  - changeSet:
+      id: 5
+      author: mas
+      changes:
+        - insert:
+            tableName: firmware_version
+            columns:
+              - column:
+                  name: version_number
+                  value: "3.8.12"
+              - column:
+                  name: download_url
+                  value: "www.api.version/3.8.12"
+              - column:
+                  name: hardware_id
+                  value: "NCC-74656"

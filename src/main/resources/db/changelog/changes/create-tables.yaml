@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: mas
+      preconditions:
+        - not:
+          - tableExists:
+              tableName: device
+      changes:
+        - createTable:
+            tableName: device
+            columns:
+              - column:
+                  name: hardware_id
+                  type: VARCHAR(10)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: product_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: launch_year
+                  type: date
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 2
+      author: mas
+      preconditions:
+        - not:
+            - tableExists:
+                tableName: firmware_version
+      changes:
+        - createTable:
+            tableName: firmware_version
+            columns:
+              - column:
+                  name: version_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: version_number
+                  type: VARCHAR(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: download_url
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hardware_id
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 3
+      author: mas
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: hardware_id
+            baseTableName: firmware_version
+            constraintName: fk_hardware_id
+            referencedColumnNames: hardware_id
+            referencedTableName: device
+            validate: true

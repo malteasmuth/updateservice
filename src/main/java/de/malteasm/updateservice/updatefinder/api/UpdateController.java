@@ -5,7 +5,7 @@ import de.malteasm.updateservice.updatefinder.api.dto.UpdateInformation;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 public class UpdateController{
 
     private final UpdateService updateService;

@@ -17,7 +17,7 @@ public class PublishFirmwareController {
         this.publishFirmwareService = publishFirmwareService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public FirmwareVersionDto createFirmwareVersion(@RequestBody FirmwareVersionDto firmwareVersion) {
         return publishFirmwareService.save(firmwareVersion);
     }

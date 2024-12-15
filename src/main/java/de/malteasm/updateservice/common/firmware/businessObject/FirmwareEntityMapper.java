@@ -26,7 +26,7 @@ public class FirmwareEntityMapper {
         Firmware firmware = new Firmware();
         firmware.setDownloadURL(firmwareBusinessObject.getDownloadURL());
         firmware.setHardwareId(firmwareBusinessObject.getHardwareId());
-        firmware.setVersionNumber(firmware.getVersionNumber());
+        firmware.setVersionNumber(firmwareBusinessObject.getVersionNumber().toString());
 
         return firmware;
     }

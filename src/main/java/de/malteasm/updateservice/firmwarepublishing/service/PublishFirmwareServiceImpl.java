@@ -23,7 +23,11 @@ public class PublishFirmwareServiceImpl implements PublishFirmwareService {
     @Override
     public FirmwareVersionDto save(FirmwareVersionDto firmware) {
         Version versionNumber = entityMapper.createVersionFromString(firmware.getVersionNumber());
-        FirmwareBusinessObject firmwareToSave = new FirmwareBusinessObject(versionNumber, firmware.getDownloadUrl(), firmware.getHardwareId());
+
+        FirmwareBusinessObject firmwareToSave = new FirmwareBusinessObject();
+        firmwareToSave.setHardwareId(firmware.getHardwareId());
+        firmwareToSave.setVersionNumber(versionNumber);
+        firmwareToSave.setDownloadURL(firmware.getDownloadUrl());
 
         Firmware savedFirmware = firmwareRepository.save(entityMapper.toEntity(firmwareToSave));
         FirmwareBusinessObject firmwareBusinessObject = entityMapper.toBusinessObject(savedFirmware);

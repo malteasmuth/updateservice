@@ -40,7 +40,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: version_id
-                  type: INT
+                  type: SERIAL
                   autoIncrement: true
                   constraints:
                     primaryKey: true
